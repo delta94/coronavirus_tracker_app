@@ -1,4 +1,5 @@
 import 'package:coronavirus_tracker_app/app/repositories/data_repository.dart';
+import 'package:coronavirus_tracker_app/app/repositories/endpoints_data.dart';
 import 'package:coronavirus_tracker_app/app/services/api.dart';
 import 'package:coronavirus_tracker_app/app/ui/endpoint_card.dart';
 import 'package:flutter/material.dart';
@@ -10,12 +11,12 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  int _cases;
+  EndpointsData _endpointsData;
 
   Future<void> _updateData() async {
     final dataRepository = Provider.of<DataRepository>(context, listen: false);
-    final cases = await dataRepository.getEndpointData(Endpoint.cases);
-    setState(() => _cases = cases);
+    final endpointData = await dataRepository.getAllEndpointsData();
+    setState(() => _endpointsData = endpointData);
   }
 
   @override
@@ -27,19 +28,21 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Coronavirus Tracker'),
-        ),
-        body: RefreshIndicator(
-          onRefresh: _updateData,
-                  child: ListView(
-            children: <Widget>[
+      appBar: AppBar(
+        title: Text('Coronavirus Tracker'),
+      ),
+      body: RefreshIndicator(
+        onRefresh: _updateData,
+        child: ListView(
+          children: <Widget>[
+            for (var endpoint in Endpoint.values)
               EndpointCard(
-                endpoint: Endpoint.cases,
-                value: _cases,
+                endpoint: endpoint,
+                value: _endpointsData != null ? _endpointsData.values[endpoint] : null,
               )
-            ],
-          ),
-        ));
+          ],
+        ),
+      ),
+    );
   }
 }

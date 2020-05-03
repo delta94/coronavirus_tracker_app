@@ -40,6 +40,8 @@ class ApiService {
         final Map<String, dynamic> endpointData = data[0];
         final String responseJsonKey = _resposeJsonKeys[endpoint];
         final int result = endpointData[responseJsonKey];
+        final String dateString = endpointData['date'];
+        final date = DateTime.tryParse(dateString);
         if (result != null) {
           return result;
         }
