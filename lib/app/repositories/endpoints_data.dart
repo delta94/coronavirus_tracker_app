@@ -1,14 +1,15 @@
 import 'package:coronavirus_tracker_app/app/services/api.dart';
+import 'package:coronavirus_tracker_app/app/services/endpoint_data.dart';
 import 'package:flutter/foundation.dart';
 
 class EndpointsData {
-  final Map<Endpoint, int> values;
+  final Map<Endpoint, EndpointData> values;
 
-  int get cases => values[Endpoint.cases];
-  int get casesSuspected => values[Endpoint.casesSuspected];
-  int get casesConfirmed => values[Endpoint.casesConfirmed];
-  int get deaths => values[Endpoint.deaths];
-  int get recovered => values[Endpoint.recovered];
+  EndpointData get cases => values[Endpoint.cases];
+  EndpointData get casesSuspected => values[Endpoint.casesSuspected];
+  EndpointData get casesConfirmed => values[Endpoint.casesConfirmed];
+  EndpointData get deaths => values[Endpoint.deaths];
+  EndpointData get recovered => values[Endpoint.recovered];
 
   EndpointsData({@required this.values});
 

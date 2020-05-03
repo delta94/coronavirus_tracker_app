@@ -1,5 +1,6 @@
 import 'package:coronavirus_tracker_app/app/services/api.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class EndpointCardData {
   final String title;
@@ -28,6 +29,13 @@ class EndpointCard extends StatelessWidget {
         EndpointCardData('Recovered', 'assets/patient.png', Color(0xFF70A901)),
   };
 
+  String get formattedValue {
+    if (value == null) {
+      return '';
+    }
+    return NumberFormat('#,###,###,###').format(value);
+  }
+
   @override
   Widget build(BuildContext context) {
     final cardData = _cardsData[endpoint];
@@ -40,7 +48,7 @@ class EndpointCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                cardData.title,
+                formattedValue,
                 style: Theme.of(context)
                     .textTheme
                     .headline
