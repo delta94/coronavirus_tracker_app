@@ -1,12 +1,13 @@
 import 'package:coronavirus_tracker_app/app/repositories/endpoints_data.dart';
 import 'package:coronavirus_tracker_app/app/services/api.dart';
 import 'package:coronavirus_tracker_app/app/services/endpoint_data.dart';
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DataCacheService {
   final SharedPreferences sharedPreferences;
 
-  DataCacheService(this.sharedPreferences);
+  DataCacheService({@required this.sharedPreferences});
 
   static String endpointValueKey(Endpoint endpoint) => '$endpoint/value';
   static String endpointDateKey(Endpoint endpoint) => '$endpoint/date';
