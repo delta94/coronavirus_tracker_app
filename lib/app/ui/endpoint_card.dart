@@ -48,7 +48,7 @@ class EndpointCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                formattedValue,
+                cardData.title,
                 style: Theme.of(context)
                     .textTheme
                     .headline
@@ -63,7 +63,7 @@ class EndpointCard extends StatelessWidget {
                   children: <Widget>[
                     Image.asset(cardData.assetName, color: cardData.color),
                     Text(
-                      value != null ? value.toString() : '',
+                      formattedValue,
                       style: Theme.of(context).textTheme.display1.copyWith(
                             color: cardData.color,
                             fontWeight: FontWeight.w500,
